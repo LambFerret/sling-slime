@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
-namespace Script.setting
+namespace setting
 {
     public class LocaleManager : MonoBehaviour
     {
