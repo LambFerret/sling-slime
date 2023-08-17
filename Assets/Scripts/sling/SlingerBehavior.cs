@@ -1,4 +1,5 @@
 using System;
+using Cinemachine;
 using UnityEngine;
 using DG.Tweening;
 
@@ -6,10 +7,15 @@ namespace sling
 {
     public class SlingerBehavior : MonoBehaviour
     {
-        public LineRenderer rope;
+        [Header("Slinger Rope")] public LineRenderer rope;
         public int maxDistance;
         public int minDistance;
         public float elasticity;
+        [Header("Slinger Camera")] public CinemachineVirtualCamera virtualCamera;
+        public float minZoom = 3f;
+        public float maxZoom = 10f;
+        public float zoomFactor = 1f; // 속도에 따른 줌 인/아웃 비율
+        public float screenYSpeedAdjustment = 0.1f; // 이 값을 조절하여 ScreenY 변화 속도 조절 가능
 
         private Slime _slime;
         private bool _isDragging;
@@ -54,6 +60,36 @@ namespace sling
                 }
             }
 
+            if (IsThisOutOfView(_slime.transform))
+            {
+                ChangeCameraTarget(_slime.transform);
+            }
+
+            if (virtualCamera.LookAt is not null)
+            {
+                float verticalSpeed = _slime.rb.velocity.y;
+
+                // 슬라임의 속도와 줌 팩터에 따라 줌을 조절
+                float desiredZoom = virtualCamera.m_Lens.OrthographicSize + verticalSpeed * zoomFactor;
+                // 슬라임의 속도에 따라 ScreenY 조절
+                if (verticalSpeed > 0)
+                {
+                    virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY =
+                        Mathf.MoveTowards(
+                            virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY, 1,
+                            screenYSpeedAdjustment);
+                }
+                else if (verticalSpeed < 0)
+                {
+                    virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY =
+                        Mathf.MoveTowards(
+                            virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>().m_ScreenY, -0F,
+                            screenYSpeedAdjustment);
+                }
+
+                virtualCamera.m_Lens.OrthographicSize = Mathf.Clamp(desiredZoom, minZoom, maxZoom);
+            }
+
             if (Input.GetMouseButtonUp(0) && _isDragging)
             {
                 _isDragging = false;
@@ -78,6 +114,12 @@ namespace sling
             rope.SetPosition(1, _slime.transform.position);
         }
 
+        private bool IsThisOutOfView(Transform t)
+        {
+            Vector3 screenPoint = _cam.WorldToViewportPoint(t.position);
+            return screenPoint.x < 0 || screenPoint.x > 1 || screenPoint.y < 0 || screenPoint.y > 1;
+        }
+
         private void DragSlime()
         {
             Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
@@ -93,12 +135,19 @@ namespace sling
             {
                 direction = RotateByAngle(Vector2.up, 180).normalized * direction.magnitude;
             }
+
             if (direction.magnitude > maxDistance)
             {
                 direction = direction.normalized * maxDistance;
             }
 
             _slime.transform.position = transform.position + (Vector3)direction;
+        }
+
+        private void ChangeCameraTarget(Transform newTarget)
+        {
+            virtualCamera.Follow = newTarget;
+            virtualCamera.LookAt = newTarget;
         }
 
         private static Vector2 RotateByAngle(Vector2 vector, float angle)
