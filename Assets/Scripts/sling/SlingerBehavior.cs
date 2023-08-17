@@ -11,10 +11,10 @@ namespace sling
         public int minDistance;
         public float elasticity;
 
-        [SerializeField] private Slime _slime;
-        [SerializeField] private bool _isDragging;
-        [SerializeField] private bool _isLoaded;
-        [SerializeField] private Camera _cam;
+        private Slime _slime;
+        private bool _isDragging;
+        private bool _isLoaded;
+        private Camera _cam;
 
         private void Awake()
         {
@@ -83,12 +83,30 @@ namespace sling
             Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = mousePos - (Vector2)transform.position;
 
+            float angle = Vector2.SignedAngle(Vector2.up, direction);
+
+            if (angle is < 90 and > 0) // 270도보다 큰 경우
+            {
+                direction = RotateByAngle(Vector2.up, 90).normalized * direction.magnitude;
+            }
+            else if (angle is < 0 or 180) // 180도보다 작은 경우
+            {
+                direction = RotateByAngle(Vector2.up, 180).normalized * direction.magnitude;
+            }
             if (direction.magnitude > maxDistance)
             {
                 direction = direction.normalized * maxDistance;
             }
 
             _slime.transform.position = transform.position + (Vector3)direction;
+        }
+
+        private static Vector2 RotateByAngle(Vector2 vector, float angle)
+        {
+            return new Vector2(
+                vector.x * Mathf.Cos(angle * Mathf.Deg2Rad) - vector.y * Mathf.Sin(angle * Mathf.Deg2Rad),
+                vector.x * Mathf.Sin(angle * Mathf.Deg2Rad) + vector.y * Mathf.Cos(angle * Mathf.Deg2Rad)
+            );
         }
     }
 }

@@ -827,11 +827,7 @@ MonoBehaviour:
   rope: {fileID: 1604568545}
   maxDistance: 5
   minDistance: 2
-  elasticity: 12
-  _slime: {fileID: 0}
-  _isDragging: 0
-  _isLoaded: 0
-  _cam: {fileID: 0}
+  elasticity: 2
 --- !u!61 &1561697069
 BoxCollider2D:
   m_ObjectHideFlags: 0
