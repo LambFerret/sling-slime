@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Character
   - Slinger
+  - Ground
   layers:
   - Default
   - TransparentFX

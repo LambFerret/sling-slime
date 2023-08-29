@@ -14,11 +14,24 @@ namespace events
         }
 
 
-        public event Action<float> OnPopularityChanged;
-
-        public void PopularityChanged(float value)
+        public event Action<int> OnScoreChanged;
+        public void ScoreChanged(int value)
         {
-            OnPopularityChanged?.Invoke(value);
+            OnScoreChanged?.Invoke(value);
+        }
+
+        public event Action<float> OnSpeedChanged;
+
+        public void SpeedChanged(float value)
+        {
+            OnSpeedChanged?.Invoke(value);
+        }
+
+        public event Action<float> OnSizeChanged;
+
+        public void SizeChanged(float value)
+        {
+            OnSizeChanged?.Invoke(value);
         }
 
         public event Action<int> OnMoneyChanged;
@@ -27,6 +40,5 @@ namespace events
         {
             OnMoneyChanged?.Invoke(value);
         }
-
     }
 }

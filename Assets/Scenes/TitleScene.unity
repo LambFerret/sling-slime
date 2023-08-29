@@ -341,7 +341,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.1
+  m_Mass: 0.55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1019,10 +1019,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rope: {fileID: 1604568545}
-  maxDistance: 5
-  minDistance: 2
-  elasticity: 2
-  virtualCamera: {fileID: 1256247756}
+  maxDistance: 2
+  minDistance: 1
+  elasticity: 4
 --- !u!61 &1561697069
 BoxCollider2D:
   m_ObjectHideFlags: 0
