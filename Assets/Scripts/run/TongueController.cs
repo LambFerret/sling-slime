@@ -11,13 +11,18 @@ namespace run
             Shooting,
             LineMax,
             Attached,
+            Consuming
         }
 
         public LineRenderer line;
         public Transform hook;
+        public float desiredAngle;
+
         private DistanceJoint2D _joint;
         public float hookSpeed = 10f;
         public float maxLength;
+
+        private PlayerBehavior _player;
 
         private Vector2 _direction = Vector2.right + Vector2.up;
         public State currentState;
@@ -26,6 +31,7 @@ namespace run
         {
             line = hook.Find("Line").GetComponent<LineRenderer>();
             _joint = hook.GetComponent<HookBehavior>().joint;
+            _player = GetComponent<PlayerBehavior>();
             line.positionCount = 2;
             line.endWidth = line.startWidth = 0.1f;
             line.SetPosition(0, transform.position);
@@ -43,6 +49,7 @@ namespace run
             {
                 case State.Idle:
                     hook.SetParent(transform);
+                    hook.gameObject.SetActive(false);
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
                         hook.position = transform.position;
@@ -75,21 +82,40 @@ namespace run
                     hook.SetParent(null);
                     float currentDistance = Vector2.Distance(transform.position, hook.position);
 
-                    // If joint distance is longer than current distance, set joint distance to current distance
                     if (_joint.distance > currentDistance)
                     {
                         _joint.distance = currentDistance;
                     }
 
+                    Vector2 dir = (Vector2)hook.position - (Vector2)transform.position;
+                    float angle = Vector2.Angle(Vector2.right, dir);
+
                     if (Input.GetKeyUp(KeyCode.Space))
                     {
-                        currentState = State.Idle;
-                        _joint.enabled = false;
+                        BreakTheLine();
                         hook.gameObject.SetActive(false);
-                        hook.SetParent(null);  // Detach the hook from the player
+                        _player.rb.velocity += new Vector2(5f, 0);
+
                     }
+
+                    if (Math.Abs(angle - desiredAngle) < 10F)
+                    {
+                        BreakTheLine();
+                        _player.rb.velocity -= new Vector2(5f, 0);
+                    }
+
+                    break;
+                case State.Consuming:
+                    // act consume animation
                     break;
             }
+        }
+
+        private void BreakTheLine()
+        {
+            currentState = State.Idle;
+            _joint.enabled = false;
+            hook.gameObject.SetActive(false);
         }
     }
 }

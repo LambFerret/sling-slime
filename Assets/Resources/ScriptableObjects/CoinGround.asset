@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2053e528ac3041c78b80ddbc1508c0fb, type: 3}
-  m_Name: BigScore
+  m_Name: CoinGround
   m_EditorClassIdentifier: 
-  scoreName: big
-  value: 5
-  sizeValue: 10
-  sprite: {fileID: 21300000, guid: 2d38b116f40404e27beed0718fb999dc, type: 3}
+  scoreType: 1
+  scoreName: g
+  value: 3
+  sizeValue: 5

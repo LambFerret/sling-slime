@@ -8,13 +8,14 @@ namespace components
         public GameObject pooledObject;
         public int pooledAmount;
         public List<GameObject> pooledObjects;
+        public GameObject shelf;
 
         private void Start()
         {
             pooledObjects = new List<GameObject>();
             for (int i = 0; i < pooledAmount; i++)
             {
-                GameObject obj = Instantiate(pooledObject);
+                GameObject obj = Instantiate(pooledObject, shelf.transform);
                 obj.SetActive(false);
                 pooledObjects.Add(obj);
             }
@@ -30,7 +31,7 @@ namespace components
                 }
             }
 
-            GameObject obj = Instantiate(pooledObject);
+            GameObject obj = Instantiate(pooledObject, shelf.transform);
             obj.SetActive(false);
             pooledObjects.Add(obj);
             return obj;

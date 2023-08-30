@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2053e528ac3041c78b80ddbc1508c0fb, type: 3}
-  m_Name: SmallScore
+  m_Name: CoinFlying
   m_EditorClassIdentifier: 
-  scoreName: small
-  value: 3
-  sizeValue: 5
-  sprite: {fileID: 21300000, guid: c637648daf0ee4de38c2d9ad70768139, type: 3}
+  scoreType: 0
+  scoreName: f
+  value: 5
+  sizeValue: 10
