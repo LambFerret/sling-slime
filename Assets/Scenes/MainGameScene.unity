@@ -150,6 +150,10 @@ PrefabInstance:
       propertyPath: desiredAngle
       value: 115
       objectReference: {fileID: 0}
+    - target: {fileID: 6451566085718341654, guid: eef4297754b004f9697fca2da5272c91, type: 3}
+      propertyPath: m_GravityScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8019711588849641743, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_RootOrder
       value: 3

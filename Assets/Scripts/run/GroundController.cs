@@ -30,7 +30,6 @@ namespace run
             currentZoom = virtualCamera.m_Lens.OrthographicSize;
 
             // Initialize the ground position
-            _floor = groundPool.pooledObject.transform.Find("floor");
             _groundWidth = _floor.GetComponent<BoxCollider2D>().size.x * _floor.transform.localScale.x;
             lastGroundX = transform.position.x;
             _cam = Camera.main;

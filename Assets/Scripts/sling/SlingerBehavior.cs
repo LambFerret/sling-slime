@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
 using Cinemachine;
 using UnityEngine;
 using DG.Tweening;
+using etc;
+using UnityEngine.SceneManagement;
 
 namespace sling
 {
@@ -68,6 +71,7 @@ namespace sling
                     _slime.rb.AddForce(directionToSlinger * elasticity, ForceMode2D.Impulse);
                     _slime.transform.DOScale(0.1F, 0.5F);
                     _isLoaded = false;
+                    StartCoroutine(LoadScene());
                 }
                 else
                 {
@@ -84,6 +88,11 @@ namespace sling
         }
 
 
+        private static IEnumerator LoadScene()
+        {
+            yield return new WaitForSeconds(2f);
+            LoadingScreen.Instance.LoadScene("MainGameScene");
+        }
 
         private void DragSlime()
         {

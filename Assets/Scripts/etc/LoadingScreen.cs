@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-namespace title
+namespace etc
 {
     public class LoadingScreen : MonoBehaviour
     {

@@ -7,6 +7,7 @@ namespace run
     {
         [HideInInspector] public Rigidbody2D rb;
         public float jumpForce = 5f;
+        public float speed = 30f;
 
         private void Awake()
         {
@@ -18,10 +19,6 @@ namespace run
             if (Input.GetKey(KeyCode.Q))
             {
                 rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            }
-            else if (Input.GetKey(KeyCode.RightArrow))
-            {
-                rb.velocity = new Vector2(5f, rb.velocity.y);
             }
         }
     }
