@@ -17,45 +17,17 @@ namespace run
             _col = GetComponent<Collider2D>();
         }
 
-        private void Start()
+
+        public int CalculateScore()
         {
-            GameEventManager.Instance.OnScoreChanged += ScoreChanged;
-            GameEventManager.Instance.OnMoneyChanged += MoneyChanged;
-            GameEventManager.Instance.OnSizeChanged += SizeChanged;
+            return score.value;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public bool IsFlying()
         {
-            if (other.CompareTag("Player"))
-            {
-                GameEventManager.Instance.ScoreChanged(score.value);
-                Vector2 dir = score.scoreType == Score.ScoreType.Flying ? Vector2.right : Vector2.up;
-                other.GetComponent<PlayerBehavior>().rb.AddForce(dir * score.value, ForceMode2D.Impulse);
-                gameObject.SetActive(false);
-            }
+            return score.scoreType == Score.ScoreType.Flying;
         }
 
 
-        private void ScoreChanged(int value)
-        {
-            _col.enabled = true;
-        }
-
-        private void MoneyChanged(int value)
-        {
-            _col.enabled = false;
-        }
-
-        private void SizeChanged(float value)
-        {
-            _col.enabled = false;
-        }
-
-        private void OnDestroy()
-        {
-            GameEventManager.Instance.OnScoreChanged -= ScoreChanged;
-            GameEventManager.Instance.OnMoneyChanged -= MoneyChanged;
-            GameEventManager.Instance.OnSizeChanged -= SizeChanged;
-        }
     }
 }

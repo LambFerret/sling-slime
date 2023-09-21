@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 9167090635113650496}
   - component: {fileID: -1212653635872515515}
   - component: {fileID: 4760607670105473363}
-  m_Layer: 0
-  m_Name: FlyingCoin
-  m_TagString: FlyingEnemy
+  m_Layer: 7
+  m_Name: AirObstacle
+  m_TagString: AirObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,7 +128,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bca450fe3f049aa810c46a4c129c9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingDistance: 5
-  duration: 2
-  easeType: 4
-  isVertical: 1
+  maxSpeed: 20
+  minSpeed: 5

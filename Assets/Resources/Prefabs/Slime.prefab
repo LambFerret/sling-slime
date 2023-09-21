@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7150010923325969517}
   - component: {fileID: 6448955120822254299}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 6451566085718341654}
   - component: {fileID: 5445378360042755015}
   - component: {fileID: 2178115881949272703}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Slime
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -182,6 +182,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   jumpForce: 5
+  speed: 30
+  speedDownByGround: 0.1
+  onPlayerScoreChanged: {fileID: 0}
+  onPlayerSpeedChanged: {fileID: 0}
 --- !u!114 &5315460137663407560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   line: {fileID: 0}
   hook: {fileID: 1867900747919044760}
+  desiredAngle: 0
   hookSpeed: 100
   maxLength: 30
   currentState: 0
@@ -302,7 +307,7 @@ GameObject:
   - component: {fileID: 3005412377992552878}
   - component: {fileID: 759299534461976715}
   - component: {fileID: 7713640231561003111}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tongue
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -22,16 +22,15 @@ namespace core
             }
         }
 
+        private void Start()
+        {
+            playerSpeed = player.speed;
+        }
+
         private void Update()
         {
-            if (Input.GetKey(KeyCode.RightArrow))
-            {
-                playerSpeed = player.speed;
-            }
-            else
-            {
-                playerSpeed = 0;
-            }
+            player.speed -= Time.deltaTime * 0.1f;
+            playerSpeed = player.speed;
         }
     }
 }

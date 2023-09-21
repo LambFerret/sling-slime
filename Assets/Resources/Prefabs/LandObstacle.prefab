@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 9167090635113650496}
   - component: {fileID: -5648687365176972528}
   - component: {fileID: 708324498498663464}
-  m_Layer: 0
-  m_Name: GroundCoin
-  m_TagString: GroundEnemy
+  m_Layer: 6
+  m_Name: LandObstacle
+  m_TagString: LandObstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -150,4 +150,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bca450fe3f049aa810c46a4c129c9da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  maxSpeed: 20
+  minSpeed: 5

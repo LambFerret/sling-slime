@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2053e528ac3041c78b80ddbc1508c0fb, type: 3}
-  m_Name: CoinGround
+  m_Name: AirObstacle
   m_EditorClassIdentifier: 
-  scoreType: 1
-  scoreName: g
-  value: 3
-  sizeValue: 5
+  scoreType: 0
+  scoreName: f
+  value: 5
+  sizeValue: 10

@@ -7,8 +7,9 @@ TagManager:
   - Character
   - Slinger
   - Ground
+  - AirObstacle
+  - LandObstacle
   - GroundEnemy
-  - FlyingEnemy
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - LandObstacle
+  - AirObstacle
+  - Player
   - 
   - 
   - 

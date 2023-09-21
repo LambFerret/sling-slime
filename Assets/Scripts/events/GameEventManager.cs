@@ -5,7 +5,7 @@ namespace events
 {
     public class GameEventManager : MonoBehaviour
     {
-        public static GameEventManager Instance { get; private set; }
+        private static GameEventManager Instance { get;  set; }
 
         private void Awake()
         {
