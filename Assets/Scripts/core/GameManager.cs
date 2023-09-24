@@ -31,6 +31,13 @@ namespace core
         {
             player.speed -= Time.deltaTime * 0.1f;
             playerSpeed = player.speed;
+
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                //jump
+                Vector3 jump = Vector3.up * player.jumpForce;
+                player.rb.AddForce(jump, ForceMode2D.Impulse);
+            }
         }
     }
 }

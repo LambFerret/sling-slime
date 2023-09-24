@@ -15,7 +15,6 @@ namespace ui
 
         private void SetSpeed(float speed)
         {
-            Debug.Log(speed);
             _text.text = speed.ToString("0.00");
         }
 

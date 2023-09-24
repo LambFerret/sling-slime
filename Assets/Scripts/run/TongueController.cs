@@ -24,7 +24,7 @@ namespace run
 
         private PlayerBehavior _player;
 
-        private Vector2 _direction = Vector2.right + Vector2.up;
+        private Vector2 _direction = Vector2.right + Vector2.down;
         public State currentState;
 
         private void Start()
@@ -42,9 +42,13 @@ namespace run
 
         private void Update()
         {
-            line.SetPosition(0, transform.position);
-            line.SetPosition(1, hook.position);
+            var transformPosition = transform.position;
+            var hookPosition = hook.position;
+            line.SetPosition(0, transformPosition);
+            line.SetPosition(1, hookPosition);
 
+            float distance = Vector2.Distance(transformPosition, hookPosition);
+            Vector2 moveTowardSpeed = Vector2.MoveTowards(hookPosition, transformPosition, Time.deltaTime * hookSpeed);
             switch (currentState)
             {
                 case State.Idle:
@@ -61,7 +65,7 @@ namespace run
 
                 case State.Shooting:
                     hook.Translate(_direction.normalized * (Time.deltaTime * hookSpeed));
-                    if (Vector2.Distance(transform.position, hook.position) > maxLength)
+                    if (distance > maxLength)
                     {
                         currentState = State.LineMax;
                     }
@@ -69,22 +73,20 @@ namespace run
                     break;
 
                 case State.LineMax:
-                    hook.position = Vector2.MoveTowards(hook.position, transform.position, Time.deltaTime * hookSpeed);
-                    if (Vector2.Distance(transform.position, hook.position) < 0.1f)
+                    hook.position = moveTowardSpeed;
+                    if (distance < 0.1f)
                     {
-                        currentState = State.Idle;
-                        hook.gameObject.SetActive(false);
+                        BreakTheLine();
                     }
 
                     break;
 
                 case State.Attached:
                     hook.SetParent(null);
-                    float currentDistance = Vector2.Distance(transform.position, hook.position);
 
-                    if (_joint.distance > currentDistance)
+                    if (_joint.distance > distance)
                     {
-                        _joint.distance = currentDistance;
+                        _joint.distance = distance;
                     }
 
                     Vector2 dir = (Vector2)hook.position - (Vector2)transform.position;
@@ -93,9 +95,7 @@ namespace run
                     if (Input.GetKeyUp(KeyCode.Space))
                     {
                         BreakTheLine();
-                        hook.gameObject.SetActive(false);
                         _player.rb.velocity += new Vector2(5f, 0);
-
                     }
 
                     if (Math.Abs(angle - desiredAngle) < 10F)
@@ -106,7 +106,20 @@ namespace run
 
                     break;
                 case State.Consuming:
-                    // act consume animation
+                    hook.SetParent(null);
+                    // if this object is too close to the player, destroy it else, pull it towards with the hook
+                    if (distance < 0.1f)
+                    {
+                        // consume
+                        _player.rb.velocity += new Vector2(0, 5f);
+                        BreakTheLine();
+                    }
+                    else
+                    {
+                        // pull
+                        hook.position = moveTowardSpeed;
+                    }
+
                     break;
             }
         }

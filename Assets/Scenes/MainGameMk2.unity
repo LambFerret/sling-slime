@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3561312370362716800, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: speed
-      value: 20
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3561312370362716800, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: onPlayerScoreChanged
@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: ad6709724a8ed46b7a172dfa7d693e8b, type: 2}
     - target: {fileID: 6451566085718341654, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_BodyType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6451566085718341654, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_Material
@@ -156,7 +156,7 @@ PrefabInstance:
       objectReference: {fileID: 6200000, guid: b0b1c590a98ce4d9cb530cf7da04c1fa, type: 2}
     - target: {fileID: 6451566085718341654, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_Constraints
-      value: 6
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8019711588849641743, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_RootOrder
@@ -164,11 +164,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8019711588849641743, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.19
+      value: -12.81
       objectReference: {fileID: 0}
     - target: {fileID: 8019711588849641743, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.56
+      value: -0.49
       objectReference: {fileID: 0}
     - target: {fileID: 8019711588849641743, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_LocalPosition.z
@@ -394,7 +394,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491801043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.19, y: -1.56, z: -10}
+  m_LocalPosition: {x: -12.81, y: -0.49, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -512,7 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 5085597889801306918, guid: 423a6a8b5546a40a09971197d177db7b, type: 3}
-  pooledAmount: 300
+  pooledAmount: 100
   pooledObjects: []
   shelf: {fileID: 237212499}
   isRandom: 0
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 5085597889801306918, guid: be801c61aeea64699ae295c49fa82e56, type: 3}
-  pooledAmount: 300
+  pooledAmount: 100
   pooledObjects: []
   shelf: {fileID: 554329549}
   isRandom: 0
@@ -754,7 +754,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1008426995}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.19, y: -1.56, z: -10}
+  m_LocalPosition: {x: -12.81, y: -0.49, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1610,9 +1610,9 @@ MonoBehaviour:
   groundPool: {fileID: 1679677809}
   landObstaclePool: {fileID: 722127931}
   airObstaclePool: {fileID: 742621887}
-  landObstacleMaxCount: 300
-  airObstacleMaxCount: 300
-  landObstacleMinCount: 200
+  landObstacleMaxCount: 100
+  airObstacleMaxCount: 200
+  landObstacleMinCount: 100
   airObstacleMinCount: 200
   landSpawnPoint: {fileID: 1104675204}
   airSpawnPointMin: {fileID: 1240474655}

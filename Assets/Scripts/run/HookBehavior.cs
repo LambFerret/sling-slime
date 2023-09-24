@@ -8,27 +8,26 @@ namespace run
     public class HookBehavior : MonoBehaviour
     {
         private TongueController _tongue;
-        private PlayerBehavior _player;
         public DistanceJoint2D joint;
 
         private void Awake()
         {
             _tongue = FindObjectOfType<TongueController>();
-            _player = _tongue.GetComponent<PlayerBehavior>();
             joint = GetComponent<DistanceJoint2D>();
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Ground"))
+            if (other.CompareTag("LandObstacle"))
             {
                 joint.enabled = true;
-                _tongue.currentState = TongueController.State.Attached;
+                _tongue.currentState = TongueController.State.Consuming;
+                other.transform.SetParent(transform);
             }
-            else if (other.CompareTag("GroundEnemy"))
+            else if (other.CompareTag("Ground"))
             {
-                joint.enabled = true;
-                _tongue.currentState = TongueController.State.Attached;
+                // joint.enabled = true;
+                // _tongue.currentState = TongueController.State.Attached;
             }
         }
     }

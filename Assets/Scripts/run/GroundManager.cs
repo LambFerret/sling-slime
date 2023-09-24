@@ -16,7 +16,6 @@ namespace run
         public int landObstacleMinCount;
         public int airObstacleMinCount;
 
-
         public Transform landSpawnPoint;
         public Transform airSpawnPointMin;
         public Transform airSpawnPointMax;
@@ -81,7 +80,8 @@ namespace run
             float aspectRatio = Screen.width / (float)Screen.height;
             float worldScreenWidth = 2 * virtualCamera.m_Lens.OrthographicSize * aspectRatio;
 
-            float guaranteedRightPositionX = finalCameraPosition.x + worldScreenWidth / 2 + Random.Range(1, behindOffset);
+            float guaranteedRightPositionX =
+                finalCameraPosition.x + worldScreenWidth / 2 + Random.Range(1, behindOffset);
 
             position = new Vector3(guaranteedRightPositionX, landSpawnPoint.position.y, position.z);
             obstacle.transform.position = position;
@@ -111,7 +111,8 @@ namespace run
             float aspectRatio = Screen.width / (float)Screen.height;
             float worldScreenWidth = 2 * virtualCamera.m_Lens.OrthographicSize * aspectRatio;
 
-            float guaranteedRightPositionX = finalCameraPosition.x + worldScreenWidth / 2 + Random.Range(1, behindOffset);
+            float guaranteedRightPositionX =
+                finalCameraPosition.x + worldScreenWidth / 2 + Random.Range(1, behindOffset);
 
             float randomPositionY = Random.Range(airSpawnPointMin.position.y, airSpawnPointMax.position.y);
             position = new Vector3(guaranteedRightPositionX, randomPositionY, position.z);

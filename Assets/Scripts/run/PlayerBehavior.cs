@@ -47,11 +47,6 @@ namespace run
 
                 if (score.IsFlying())
                 {
-                    Vector3 jump = Vector3.up * jumpForce;
-                   rb.AddForce(jump, ForceMode2D.Impulse);
-                }
-                else
-                {
                     speed += value;
                 }
 
