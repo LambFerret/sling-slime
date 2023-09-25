@@ -1,4 +1,5 @@
 using System;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace run
@@ -11,7 +12,8 @@ namespace run
             Shooting,
             LineMax,
             Attached,
-            Consuming
+            Consuming,
+            JustConsumed,
         }
 
         public LineRenderer line;
@@ -19,10 +21,12 @@ namespace run
         public float desiredAngle;
 
         private DistanceJoint2D _joint;
+        private HookBehavior _hookBehavior;
+
         public float hookSpeed = 10f;
         public float maxLength;
 
-        private PlayerBehavior _player;
+        [HideInInspector] public PlayerBehavior player;
 
         private Vector2 _direction = Vector2.right + Vector2.down;
         public State currentState;
@@ -30,8 +34,9 @@ namespace run
         private void Start()
         {
             line = hook.Find("Line").GetComponent<LineRenderer>();
-            _joint = hook.GetComponent<HookBehavior>().joint;
-            _player = GetComponent<PlayerBehavior>();
+            _hookBehavior = hook.gameObject.GetComponent<HookBehavior>();
+            _joint = _hookBehavior.joint;
+            player = GetComponent<PlayerBehavior>();
             line.positionCount = 2;
             line.endWidth = line.startWidth = 0.1f;
             line.SetPosition(0, transform.position);
@@ -83,27 +88,11 @@ namespace run
 
                 case State.Attached:
                     hook.SetParent(null);
-
-                    if (_joint.distance > distance)
-                    {
-                        _joint.distance = distance;
-                    }
-
+                    if (_joint.distance > distance) _joint.distance = distance;
                     Vector2 dir = (Vector2)hook.position - (Vector2)transform.position;
                     float angle = Vector2.Angle(Vector2.right, dir);
-
-                    if (Input.GetKeyUp(KeyCode.Space))
-                    {
-                        BreakTheLine();
-                        _player.rb.velocity += new Vector2(5f, 0);
-                    }
-
-                    if (Math.Abs(angle - desiredAngle) < 10F)
-                    {
-                        BreakTheLine();
-                        _player.rb.velocity -= new Vector2(5f, 0);
-                    }
-
+                    if (Input.GetKeyUp(KeyCode.Space)) BreakTheLine();
+                    if (Math.Abs(angle - desiredAngle) < 10F) BreakTheLine();
                     break;
                 case State.Consuming:
                     hook.SetParent(null);
@@ -111,8 +100,7 @@ namespace run
                     if (distance < 0.1f)
                     {
                         // consume
-                        _player.rb.velocity += new Vector2(0, 5f);
-                        BreakTheLine();
+                        currentState = State.JustConsumed;
                     }
                     else
                     {
@@ -120,6 +108,13 @@ namespace run
                         hook.position = moveTowardSpeed;
                     }
 
+                    break;
+                case State.JustConsumed:
+                    Score score = _hookBehavior.whatsOnTheHook;
+                    Debug.Log(score.forceAmount);
+                    player.rb.AddForce(score.forceAmount, ForceMode2D.Impulse);
+                    _hookBehavior.whatsOnTheHook = null;
+                    BreakTheLine();
                     break;
             }
         }

@@ -9,20 +9,21 @@ namespace run
         public ObjectPooler groundPool;
         public ObjectPooler flyingCoinPool;
         public ObjectPooler groundCoinPool;
-        private float _groundWidth;
         public PlayerBehavior player;
-        private Camera _cam;
-        private float lastGroundX;
-        private Transform _floor;
 
         [Header("Camera")] public CinemachineVirtualCamera virtualCamera;
         public float minZoom = 1f;
         public float maxZoom = 5f;
         public float zoomFactor = 1f; // 속도에 따른 줌 인/아웃 비율
         public float screenYSpeedAdjustment = 0.1f; // 이 값을 조절하여 ScreenY 변화 속도 조절 가능
+
         private Vector3 playerPosition; // Store the player's position here
         private float currentZoom;
         private float targetZoom;
+        private float _groundWidth;
+        private Camera _cam;
+        private float lastGroundX;
+        private Transform _floor;
 
 
         private void Start()

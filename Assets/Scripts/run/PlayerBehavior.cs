@@ -1,6 +1,7 @@
 using System;
 using core;
 using events;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace run
@@ -38,19 +39,18 @@ namespace run
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other == null) return;
-            ScoreBehavior score = other.GetComponent<ScoreBehavior>();
-            if (score != null)
+            if (other.GetComponent<ScoreBehavior>() == null) return;
+            Score score = other.GetComponent<ScoreBehavior>().score;
+            onPlayerScoreChanged.Raise(this, score.value);
+
+            switch (score.scoreType)
             {
-                var value = score.CalculateScore();
-                onPlayerScoreChanged.Raise(this, value);
-
-                if (score.IsFlying())
-                {
-                    speed += value;
-                }
-
-                other.gameObject.SetActive(false);
+                case Score.ScoreType.Air:
+                    speed += score.forceAmount.x;
+                    other.gameObject.SetActive(false);
+                    break;
+                case Score.ScoreType.Land:
+                    break;
             }
         }
     }

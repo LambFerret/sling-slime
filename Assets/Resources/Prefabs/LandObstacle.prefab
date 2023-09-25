@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 13294648277329068}
   - component: {fileID: 6987740153736966759}
   - component: {fileID: 9167090635113650496}
-  - component: {fileID: -5648687365176972528}
   - component: {fileID: 708324498498663464}
+  - component: {fileID: 9163691391818252664}
   m_Layer: 6
   m_Name: LandObstacle
   m_TagString: LandObstacle
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!58 &9167090635113650496
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -119,25 +119,12 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.12919831, y: 0}
   serializedVersion: 2
   m_Radius: 2.7168987
---- !u!114 &-5648687365176972528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5085597889801306918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 110805233c1b4890bfd8c9b6fab6ff36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: {fileID: 11400000, guid: 0794abf36a9734308b997ec17b758974, type: 2}
 --- !u!114 &708324498498663464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +139,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   minSpeed: 0
+--- !u!114 &9163691391818252664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5085597889801306918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 110805233c1b4890bfd8c9b6fab6ff36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: {fileID: 11400000, guid: 0794abf36a9734308b997ec17b758974, type: 2}

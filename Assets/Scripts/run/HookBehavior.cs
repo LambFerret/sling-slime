@@ -1,5 +1,3 @@
-using System;
-using events;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -9,6 +7,8 @@ namespace run
     {
         private TongueController _tongue;
         public DistanceJoint2D joint;
+
+        public Score whatsOnTheHook;
 
         private void Awake()
         {
@@ -22,6 +22,7 @@ namespace run
             {
                 joint.enabled = true;
                 _tongue.currentState = TongueController.State.Consuming;
+                whatsOnTheHook = other.GetComponent<ScoreBehavior>().score;
                 other.transform.SetParent(transform);
             }
             else if (other.CompareTag("Ground"))

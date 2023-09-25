@@ -1,6 +1,8 @@
+using System;
 using components;
 using core;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace run
 {
@@ -11,18 +13,32 @@ namespace run
         public ObjectPooler landObstaclePool;
         public ObjectPooler airObstaclePool;
 
-        public int landObstacleMaxCount;
+        [Header("Distance")] public int distanceFromStart;
+        public int currentDistance;
+        public int distanceMultiplier;
+
+        [Header("Obstacle Spawn Probability")] public int landObstacleMaxCount;
         public int airObstacleMaxCount;
         public int landObstacleMinCount;
         public int airObstacleMinCount;
 
-        public Transform landSpawnPoint;
+        [Header("Spawn Points")] public Transform landSpawnPoint;
         public Transform airSpawnPointMin;
         public Transform airSpawnPointMax;
+
+        [Header("Event")] public GameEvent onProgressDistanceUpdated;
 
 
         private float _groundSpeed;
         private int _groundLastIndex;
+
+        private void Awake()
+        {
+            airObstaclePool.pooledAmount = airObstacleMaxCount;
+            landObstaclePool.pooledAmount = landObstacleMaxCount;
+            distanceMultiplier = 100;
+            distanceFromStart *= distanceMultiplier;
+        }
 
         private void Start()
         {
@@ -38,6 +54,9 @@ namespace run
 
                 UpdateGround(ground);
             }
+
+            currentDistance += (int)GameManager.instance.playerSpeed;
+            onProgressDistanceUpdated.Raise(this, currentDistance / (float)distanceFromStart);
 
             var activatedChildCount = 0;
             foreach (GameObject ob in landObstaclePool.pooledObjects)
