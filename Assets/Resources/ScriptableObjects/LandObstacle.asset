@@ -16,4 +16,4 @@ MonoBehaviour:
   scoreName: g
   value: 3
   sizeValue: 5
-  forceAmount: {x: 1, y: 3}
+  forceAmount: {x: 1, y: 10}

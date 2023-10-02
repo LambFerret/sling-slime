@@ -171,9 +171,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 3005412377992552878, guid: eef4297754b004f9697fca2da5272c91, type: 3}
+      propertyPath: m_Distance
+      value: 0.16885817
+      objectReference: {fileID: 0}
+    - target: {fileID: 3005412377992552878, guid: eef4297754b004f9697fca2da5272c91, type: 3}
+      propertyPath: m_AutoConfigureDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3561312370362716800, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: speed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3561312370362716800, guid: eef4297754b004f9697fca2da5272c91, type: 3}
+      propertyPath: speedDownByGround
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3561312370362716800, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: onPlayerScoreChanged
@@ -183,6 +195,10 @@ PrefabInstance:
       propertyPath: onPlayerSpeedChanged
       value: 
       objectReference: {fileID: 11400000, guid: ad6709724a8ed46b7a172dfa7d693e8b, type: 2}
+    - target: {fileID: 5315460137663407560, guid: eef4297754b004f9697fca2da5272c91, type: 3}
+      propertyPath: desiredAngle
+      value: 135
+      objectReference: {fileID: 0}
     - target: {fileID: 6451566085718341654, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: m_BodyType
       value: 0
@@ -576,7 +592,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 30
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -718,67 +734,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 5085597889801306918, guid: 423a6a8b5546a40a09971197d177db7b, type: 3}
-  pooledAmount: 100
+  pooledAmount: 5
   pooledObjects: []
   shelf: {fileID: 237212499}
   isRandom: 0
---- !u!1001 &740142229
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1646526670}
-    m_Modifications:
-    - target: {fileID: 436946607119276961, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_Name
-      value: Ground
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
 --- !u!1 &742621885
 GameObject:
   m_ObjectHideFlags: 0
@@ -825,7 +784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabs:
   - {fileID: 5085597889801306918, guid: be801c61aeea64699ae295c49fa82e56, type: 3}
-  pooledAmount: 100
+  pooledAmount: 5
   pooledObjects: []
   shelf: {fileID: 554329549}
   isRandom: 0
@@ -1012,7 +971,7 @@ MonoBehaviour:
   m_Follow: {fileID: 292215180}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 5
+    OrthographicSize: 30
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -1252,11 +1211,6 @@ Transform:
   m_Father: {fileID: 132201827}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1197310527 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6922871345268152959, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
-  m_PrefabInstance: {fileID: 740142229}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1240474654
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,8 +1601,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1197310527}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1699,6 +1652,7 @@ MonoBehaviour:
   prefabs:
   - {fileID: 436946607119276961, guid: 3f421fff5daf947abb3618cf827e1aaa, type: 3}
   - {fileID: 436946607119276961, guid: 3f421fff5daf947abb3618cf827e1aaa, type: 3}
+  - {fileID: 436946607119276961, guid: 968bded2618044833bb9679686016d1e, type: 3}
   - {fileID: 436946607119276961, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
   - {fileID: 436946607119276961, guid: 3f421fff5daf947abb3618cf827e1aaa, type: 3}
   - {fileID: 436946607119276961, guid: ea8030a06df35432687a6d90442c98a2, type: 3}
@@ -1893,13 +1847,13 @@ MonoBehaviour:
   groundPool: {fileID: 1679677809}
   landObstaclePool: {fileID: 722127931}
   airObstaclePool: {fileID: 742621887}
-  distanceFromStart: 50000
+  distanceFromStart: 10000
   currentDistance: 0
   distanceMultiplier: 100
-  landObstacleMaxCount: 100
-  airObstacleMaxCount: 200
-  landObstacleMinCount: 100
-  airObstacleMinCount: 200
+  landObstacleMaxCount: 5
+  airObstacleMaxCount: 5
+  landObstacleMinCount: 5
+  airObstacleMinCount: 5
   landSpawnPoint: {fileID: 1104675204}
   airSpawnPointMin: {fileID: 1240474655}
   airSpawnPointMax: {fileID: 226561623}

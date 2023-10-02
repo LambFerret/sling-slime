@@ -33,7 +33,11 @@ namespace run
 
         private void Update()
         {
-            if (speed <= 0.1F) speed = 0.1F;
+            if (speed <= 0.1F)
+            {
+                // end stage
+                speed = 0.1F;
+            }
             onPlayerSpeedChanged.Raise(this, speed);
         }
 

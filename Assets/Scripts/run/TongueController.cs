@@ -18,20 +18,22 @@ namespace run
 
         public LineRenderer line;
         public Transform hook;
-        public float desiredAngle;
+        public float desiredAngle = 45F;
 
         private DistanceJoint2D _joint;
         private HookBehavior _hookBehavior;
 
         public float hookSpeed = 10f;
         public float maxLength;
+        public Transform whatsOnTheHook;
 
         [HideInInspector] public PlayerBehavior player;
 
         private Vector2 _direction = Vector2.right + Vector2.down;
         public State currentState;
+        public float pullingSpeed = 30F;
 
-        private void Start()
+        private void Awake()
         {
             line = hook.Find("Line").GetComponent<LineRenderer>();
             _hookBehavior = hook.gameObject.GetComponent<HookBehavior>();
@@ -87,15 +89,16 @@ namespace run
                     break;
 
                 case State.Attached:
-                    hook.SetParent(null);
-                    if (_joint.distance > distance) _joint.distance = distance;
-                    Vector2 dir = (Vector2)hook.position - (Vector2)transform.position;
-                    float angle = Vector2.Angle(Vector2.right, dir);
-                    if (Input.GetKeyUp(KeyCode.Space)) BreakTheLine();
-                    if (Math.Abs(angle - desiredAngle) < 10F) BreakTheLine();
+                    if (_joint.distance > maxLength) currentState = State.LineMax;
+
+                    player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
+                    Vector2 dir = (Vector2)transform.position - (Vector2)hook.position;
+                    float angle = Vector2.Angle(Vector2.left, dir);
+                    if (angle > desiredAngle) currentState = State.Consuming;
                     break;
                 case State.Consuming:
                     hook.SetParent(null);
+                    whatsOnTheHook.SetParent(hook);
                     // if this object is too close to the player, destroy it else, pull it towards with the hook
                     if (distance < 0.1f)
                     {
@@ -105,15 +108,15 @@ namespace run
                     else
                     {
                         // pull
-                        hook.position = moveTowardSpeed;
+                        hook.position = Vector2.MoveTowards(hookPosition, transformPosition,
+                            Time.deltaTime * pullingSpeed);
                     }
 
                     break;
                 case State.JustConsumed:
-                    Score score = _hookBehavior.whatsOnTheHook;
-                    Debug.Log(score.forceAmount);
-                    player.rb.AddForce(score.forceAmount, ForceMode2D.Impulse);
-                    _hookBehavior.whatsOnTheHook = null;
+                    player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
+                    player.rb.AddForce(whatsOnTheHook.GetComponent<ScoreBehavior>().score.forceAmount,
+                        ForceMode2D.Impulse);
                     BreakTheLine();
                     break;
             }
@@ -121,9 +124,17 @@ namespace run
 
         private void BreakTheLine()
         {
+            whatsOnTheHook = null;
             currentState = State.Idle;
             _joint.enabled = false;
             hook.gameObject.SetActive(false);
+        }
+
+        public void TargetAttached(Collider2D target)
+        {
+            currentState = State.Attached;
+            whatsOnTheHook = target.transform;
+            hook.SetParent(whatsOnTheHook);
         }
     }
 }
