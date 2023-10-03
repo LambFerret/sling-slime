@@ -12,7 +12,7 @@ namespace run
         public ObjectPooler groundPool;
         public ObjectPooler landObstaclePool;
         public ObjectPooler airObstaclePool;
-        public ObjectPooler itemPool;
+        public ItemSpawner itemPool;
 
         [Header("Distance")] public int distanceFromStart;
         public int currentDistance;
@@ -125,7 +125,11 @@ namespace run
         private void SpawnAirObstacle(float probability = 1F)
         {
             if (Random.Range(0F, 1F) > probability) return;
-            var obstacle = airObstaclePool.GetPooledObject(groundPool.pooledObjects[_groundLastIndex]);
+            var randomValue = Random.Range(0, itemPool.spawnChance);
+            var obstacle = randomValue == 0
+                ? itemPool.SpawnRandomItem(groundPool.pooledObjects[_groundLastIndex])
+                : airObstaclePool.GetPooledObject(groundPool.pooledObjects[_groundLastIndex]);
+
             var position = obstacle.transform.position;
             var virtualCamera = GameManager.instance.virtualCamera;
             Vector3 finalCameraPosition = virtualCamera.State.FinalPosition;

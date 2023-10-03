@@ -10,7 +10,7 @@ namespace item
         public string itemName;
         public string itemDescription;
         public Sprite sprite;
-        public float spawnChance;
+        public int spawnChance;
         public bool isUnlocked;
 
         private GameEvent _onItemGet;

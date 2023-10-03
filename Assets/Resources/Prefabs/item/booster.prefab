@@ -49,7 +49,7 @@ MonoBehaviour:
   itemName: Booster
   itemDescription: boo~
   sprite: {fileID: 0}
-  spawnChance: 0.3
+  spawnChance: 30
   isUnlocked: 1
   boostPower: 5
   duration: 5

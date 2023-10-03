@@ -213,7 +213,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a49a5a84a46a6b35322d2a1b05908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
 --- !u!114 &32540477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,15 +1695,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 844000897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3af23872bece42f1bec612700cbea5cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 163f7f6dc28148a6b3f91ffb113a21b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabs:
-  - {fileID: 4221238257369963866, guid: 2cf5953a37280494e863f355510f7ec6, type: 3}
-  pooledAmount: 5
-  pooledObjects: []
-  shelf: {fileID: 554329549}
-  isRandom: 0
+  spawnChance: 500
+  items:
+  - {fileID: 3638552915839736968, guid: 2cf5953a37280494e863f355510f7ec6, type: 3}
+  shelf: {fileID: 844000897}
 --- !u!1 &969734934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1758,7 +1755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a49a5a84a46a6b35322d2a1b05908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
 --- !u!114 &969734937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2486,7 +2482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 274a49a5a84a46a6b35322d2a1b05908, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
 --- !u!114 &1270889694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3505,7 +3500,7 @@ MonoBehaviour:
   groundPool: {fileID: 1679677809}
   landObstaclePool: {fileID: 722127931}
   airObstaclePool: {fileID: 742621887}
-  itemPool: {fileID: 0}
+  itemPool: {fileID: 844000899}
   distanceFromStart: 10000
   currentDistance: 0
   distanceMultiplier: 100
