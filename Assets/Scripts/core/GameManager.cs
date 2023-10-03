@@ -45,22 +45,28 @@ namespace core
             virtualCamera.m_Lens.OrthographicSize = _currentZoom;
 
             // debug input
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                //jump
-                Vector3 jump = Vector3.up * player.jumpForce;
-                player.rb.AddForce(jump, ForceMode2D.Impulse);
-            }
+            if (Input.GetKeyDown(KeyCode.Q)) Jump();
+        }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                player.speed += 10;
-            }
+        public void Jump()
+        {
+            Vector3 jump = Vector3.up * player.jumpForce;
+            player.rb.AddForce(jump, ForceMode2D.Impulse);
         }
 
         public void ChangeZoom(float value)
         {
             _targetZoom = value;
+        }
+
+        public void ChangePlayerSpeed(float value)
+        {
+            player.speed = value;
+        }
+
+        public void AddPlayerSpeed(float value)
+        {
+            player.speed += value;
         }
     }
 }

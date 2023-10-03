@@ -11,7 +11,7 @@ namespace etc
     public class LoadingScreen : MonoBehaviour
     {
         public TextMeshProUGUI progressText;
-        private Image _blackScreenImage; // Image component of your black screen
+        private Image _blackScreenImage;
         private GameObject _icon;
         public static LoadingScreen Instance { get; private set; }
 
@@ -32,17 +32,26 @@ namespace etc
 
         public void LoadScene(string sceneName)
         {
-            gameObject.SetActive(true);
-            StartCoroutine(LoadSceneAsync(sceneName));
+            LoadSceneInternal(SceneManager.LoadSceneAsync(sceneName));
         }
 
-        private IEnumerator LoadSceneAsync(string sceneName)
+        public void LoadScene(int index)
+        {
+            LoadSceneInternal(SceneManager.LoadSceneAsync(index));
+        }
+
+        private void LoadSceneInternal(AsyncOperation operation)
+        {
+            gameObject.SetActive(true);
+            StartCoroutine(LoadSceneAsyncRoutine(operation));
+        }
+
+        private IEnumerator LoadSceneAsyncRoutine(AsyncOperation operation)
         {
             // Start the fade in
             _blackScreenImage.DOFade(1, 0.3f);
             yield return new WaitForSeconds(0.3f);
 
-            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
             while (!operation.isDone)
             {
                 float progress = Mathf.Clamp01(operation.progress / .9f) * 100f;

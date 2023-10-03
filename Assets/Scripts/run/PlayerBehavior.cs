@@ -45,7 +45,7 @@ namespace run
         {
             if (other.GetComponent<ScoreBehavior>() == null) return;
             Score score = other.GetComponent<ScoreBehavior>().score;
-            onPlayerScoreChanged.Raise(this, score.value);
+            onPlayerScoreChanged.Raise(this, score.scoreValue);
 
             switch (score.scoreType)
             {

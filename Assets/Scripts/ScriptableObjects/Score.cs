@@ -13,7 +13,7 @@ namespace ScriptableObjects
 
         public ScoreType scoreType;
         public string scoreName;
-        public int value;
+        public int scoreValue;
         public float sizeValue;
         public Vector2 forceAmount;
     }
