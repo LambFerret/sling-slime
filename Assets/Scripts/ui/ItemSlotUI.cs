@@ -8,7 +8,7 @@ namespace ui
     [RequireComponent(typeof(Button))]
     public class ItemSlotUI : MonoBehaviour
     {
-        public Image icon;
+        // public Image icon;
 
         private Item _item;
         private TextMeshProUGUI _text;
@@ -23,16 +23,16 @@ namespace ui
         public void SetItem(Item item)
         {
             _item = item;
-            icon.sprite = _item.sprite;
-            icon.enabled = true;
+            // icon.sprite = _item.sprite;
+            // icon.enabled = true;
             _text.text = _item.itemName;
         }
 
         private void ClearItem()
         {
             _item = null;
-            icon.sprite = null;
-            icon.enabled = false;
+            // icon.sprite = null;
+            // icon.enabled = false;
             _text.text = "";
         }
 

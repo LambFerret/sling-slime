@@ -1,3 +1,6 @@
+using System;
+using core;
+using run;
 using UnityEngine;
 
 namespace item
@@ -10,9 +13,24 @@ namespace item
         public float spawnChance;
         public bool isUnlocked;
 
+        private GameEvent _onItemGet;
+
+        private void Awake()
+        {
+            _onItemGet = Resources.Load<GameEvent>("ScriptableObjects/event/GetItem");
+        }
+
         public virtual void Use()
         {
             Debug.Log("Using " + itemName);
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.GetComponent<PlayerBehavior>() == null) return;
+            Debug.Log("trigger entered");
+            _onItemGet.Raise(this, this);
+            gameObject.SetActive(false);
         }
     }
 }

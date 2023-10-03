@@ -81,7 +81,7 @@ namespace run
 
                 case State.LineMax:
                     hook.position = moveTowardSpeed;
-                    if (distance < 0.1f)
+                    if (distance < 1)
                     {
                         BreakTheLine();
                     }
@@ -100,10 +100,10 @@ namespace run
                     hook.SetParent(null);
                     whatsOnTheHook.SetParent(hook);
                     // if this object is too close to the player, destroy it else, pull it towards with the hook
-                    if (distance < 0.1f)
+                    if (distance < 1)
                     {
-                        // consume
-                        currentState = State.JustConsumed;
+                        _hookBehavior.ClearChildren();
+                        BreakTheLine();
                     }
                     else
                     {
@@ -114,10 +114,6 @@ namespace run
 
                     break;
                 case State.JustConsumed:
-                    player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
-                    player.rb.AddForce(whatsOnTheHook.GetComponent<ScoreBehavior>().score.forceAmount,
-                        ForceMode2D.Impulse);
-                    BreakTheLine();
                     break;
             }
         }

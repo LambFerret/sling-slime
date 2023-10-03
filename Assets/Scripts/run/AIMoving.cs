@@ -7,11 +7,17 @@ namespace run
         public float maxSpeed = 20.0f;
         public float minSpeed = 5.0f;
         private Rigidbody2D _rb;
-
         private float _speed;
+
         private void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
+        }
+
+        public void Disable()
+        {
+            _rb.velocity = Vector2.zero;
+            enabled = false;
         }
 
         private void OnEnable()

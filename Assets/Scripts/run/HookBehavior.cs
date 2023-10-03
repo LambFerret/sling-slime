@@ -1,3 +1,4 @@
+using core;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace run
     {
         private TongueController _tongue;
         public DistanceJoint2D joint;
+
+        public GameObject childToKeep;
 
         private void Awake()
         {
@@ -18,6 +21,7 @@ namespace run
         {
             if (other.CompareTag("LandObstacle"))
             {
+                other.GetComponent<AIMoving>().Disable();
                 joint.enabled = true;
                 _tongue.TargetAttached(other);
             }
@@ -26,6 +30,29 @@ namespace run
                 // joint.enabled = true;
                 _tongue.currentState = TongueController.State.LineMax;
             }
+        }
+
+        public void ClearChildren()
+        {
+            var player = GameManager.instance.player;
+            int count = 0;
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject != childToKeep)
+                {
+                    // if child doesn't have ScoreBehavior, then it's not a score. return
+                    var score = child.GetComponent<ScoreBehavior>()?.score;
+                    if (score is null) return;
+                    Debug.Log("destroy" + child.gameObject.name);
+                    player.rb.velocity = new Vector2(player.rb.velocity.x, 0);
+                    player.rb.AddForce(score.forceAmount, ForceMode2D.Impulse);
+                    child.gameObject.SetActive(false);
+                    count++;
+                }
+            }
+
+            Debug.Log(" count " + count + " children");
+
         }
     }
 }

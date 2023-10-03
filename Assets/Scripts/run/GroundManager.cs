@@ -12,6 +12,7 @@ namespace run
         public ObjectPooler groundPool;
         public ObjectPooler landObstaclePool;
         public ObjectPooler airObstaclePool;
+        public ObjectPooler itemPool;
 
         [Header("Distance")] public int distanceFromStart;
         public int currentDistance;
@@ -61,6 +62,7 @@ namespace run
             var activatedChildCount = 0;
             foreach (GameObject ob in landObstaclePool.pooledObjects)
             {
+                if (ob is null) continue;
                 if (CheckActivation(ob)) activatedChildCount++;
             }
 

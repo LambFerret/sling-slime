@@ -11,6 +11,14 @@ namespace ui
         private void Awake()
         {
             items = new List<ItemSlotUI>();
+            foreach (Transform child in transform)
+            {
+                var itemSlot = child.GetComponent<ItemSlotUI>();
+                if (itemSlot != null)
+                {
+                    items.Add(itemSlot);
+                }
+            }
         }
 
         public void AddItem(Component sender, object data)

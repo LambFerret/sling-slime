@@ -1,6 +1,5 @@
 using System;
 using core;
-using events;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -9,6 +8,10 @@ namespace run
     public class PlayerBehavior : MonoBehaviour
     {
         [HideInInspector] public Rigidbody2D rb;
+
+        [Header("Player Settings")]
+        // slime 관련 (이게 가면)
+        public Slime slime;
         public float jumpForce = 5f;
         public float speed = 30f;
         public float speedDownByGround = 0.1f;
