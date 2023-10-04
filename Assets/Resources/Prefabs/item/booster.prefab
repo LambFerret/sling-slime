@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Booster
   itemDescription: boo~
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 82ea2551c75d53a4ba26985825f08afa, type: 3}
   spawnChance: 30
   isUnlocked: 1
   boostPower: 5

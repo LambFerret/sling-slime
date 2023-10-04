@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Cinemachine;
 using run;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace core
@@ -14,6 +16,9 @@ namespace core
         public CinemachineVirtualCamera virtualCamera;
 
         public float playerSpeed;
+
+        public List<Slime> slimes;
+        public Slime currentSlime;
 
         private float _currentZoom;
         private float _targetZoom;
@@ -36,7 +41,6 @@ namespace core
         private void Update()
         {
             // player speed
-            player.speed -= Time.deltaTime * 0.1f;
             playerSpeed = player.speed;
 
             // cinematic camera
@@ -50,7 +54,7 @@ namespace core
 
         public void Jump()
         {
-            Vector3 jump = Vector3.up * player.jumpForce;
+            Vector3 jump = Vector3.up * 5;
             player.rb.AddForce(jump, ForceMode2D.Impulse);
         }
 

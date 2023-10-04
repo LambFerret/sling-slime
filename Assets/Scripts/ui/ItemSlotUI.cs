@@ -8,39 +8,60 @@ namespace ui
     [RequireComponent(typeof(Button))]
     public class ItemSlotUI : MonoBehaviour
     {
-        // public Image icon;
-
+        private Image _icon;
         private Item _item;
         private TextMeshProUGUI _text;
+        private float _duration;
+        private bool _isNowUsing;
 
         public bool IsEmpty => _item == null;
 
         private void Awake()
         {
+            _icon = GetComponent<Image>();
             _text = GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public void SetItem(Item item)
         {
             _item = item;
-            // icon.sprite = _item.sprite;
-            // icon.enabled = true;
+            _icon.sprite = _item.sprite;
+            _icon.enabled = true;
             _text.text = _item.itemName;
+            _isNowUsing = false;
+        }
+
+        private void Update()
+        {
+            if (_item is null) return;
+
+            if (_isNowUsing)
+            {
+                Debug.Log(_duration + " / " + _item.duration);
+                _duration -= Time.deltaTime;
+                _icon.fillAmount = _duration / _item.duration;
+                if (_duration <= 0)
+                {
+                    ClearItem();
+                }
+            }
         }
 
         private void ClearItem()
         {
             _item = null;
-            // icon.sprite = null;
-            // icon.enabled = false;
+            _icon.sprite = null;
+            _icon.enabled = false;
             _text.text = "";
+            _icon.fillAmount = 1;
         }
 
         public void UseItem()
         {
             if (_item is null) return;
             _item.Use();
-            ClearItem();
+            _duration = _item.duration;
+            _isNowUsing = true;
         }
     }
 }

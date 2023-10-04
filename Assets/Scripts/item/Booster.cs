@@ -1,3 +1,5 @@
+using System.Collections;
+using core;
 using UnityEngine;
 
 namespace item
@@ -5,12 +7,18 @@ namespace item
     public class Booster : Item
     {
         public float boostPower;
-        public float duration;
 
         public override void Use()
         {
             base.Use();
-            Debug.Log("Using " + itemName);
+            GameManager.instance.AddPlayerSpeed(boostPower);
+            StartCoroutine(Boost());
+        }
+
+        private IEnumerator Boost()
+        {
+            yield return new WaitForSeconds(duration);
+            GameManager.instance.AddPlayerSpeed(-boostPower);
         }
     }
 }

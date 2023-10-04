@@ -12,6 +12,7 @@ namespace item
         public Sprite sprite;
         public int spawnChance;
         public bool isUnlocked;
+        public float duration;
 
         private GameEvent _onItemGet;
 
@@ -22,7 +23,7 @@ namespace item
 
         public virtual void Use()
         {
-            Debug.Log("Using " + itemName);
+            // impl
         }
 
         private void OnTriggerEnter2D(Collider2D other)

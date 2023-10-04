@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -7,9 +8,9 @@ namespace ScriptableObjects
     {
         public enum SlimeType
         {
-            Type1,
-            Type2,
-            Type3
+            Wind,
+            Water,
+            Lightening
         }
 
         public SlimeType slimeType;
@@ -18,5 +19,19 @@ namespace ScriptableObjects
         public float health;
 
         public Sprite sprite;
+
+        public float MultiplyByType()
+        {
+            return slimeType switch
+            {
+                // 시간에 따라 감소하는 스피드 반감
+                SlimeType.Wind => 0.5F,
+                // 속도, 체력이 증가 효과를 받을 때 120%의 효과를 받음
+                SlimeType.Water => 1.2F,
+                // 오브젝트와 부딪혔을 때 잃는 속도, 체력 반감
+                SlimeType.Lightening => 0.5F,
+                _ => 1F
+            };
+        }
     }
 }

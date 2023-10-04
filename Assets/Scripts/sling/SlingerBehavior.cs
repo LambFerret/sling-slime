@@ -91,7 +91,7 @@ namespace sling
         private static IEnumerator LoadScene()
         {
             yield return new WaitForSeconds(2f);
-            LoadingScreen.Instance.LoadScene("MainGameScene");
+            LoadingScreen.Instance.LoadScene("RunScene");
         }
 
         private void DragSlime()
