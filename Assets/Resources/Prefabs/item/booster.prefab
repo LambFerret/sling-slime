@@ -51,8 +51,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 82ea2551c75d53a4ba26985825f08afa, type: 3}
   spawnChance: 30
   isUnlocked: 1
-  boostPower: 5
   duration: 5
+  boostPower: 25
 --- !u!61 &5129923533396338607
 BoxCollider2D:
   m_ObjectHideFlags: 0

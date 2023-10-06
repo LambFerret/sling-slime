@@ -38,7 +38,7 @@ namespace sling
                 case Slime.SlimeType.Wind:
                     slimeRenderer.color = Color.blue;
                     break;
-                case Slime.SlimeType.Water:
+                case Slime.SlimeType.Fire:
                     slimeRenderer.color = Color.cyan;
                     break;
                 case Slime.SlimeType.Lightening:

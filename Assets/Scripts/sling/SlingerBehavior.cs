@@ -11,7 +11,6 @@ namespace sling
         [Header("Slinger Rope")] public LineRenderer rope;
         public int maxDistance;
         public int minDistance;
-
         public float elasticity;
 
         private PlayableSlime _playableSlime;

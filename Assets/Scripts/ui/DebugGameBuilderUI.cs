@@ -50,20 +50,20 @@ namespace ui
             landObstacleMinCountInputField.text = data.landObstacleMinCount.ToString();
             airObstacleMinCountInputField.text = data.airObstacleMinCount.ToString();
             itemSpawnChanceInputField.text = data.itemSpawnChance.ToString();
-            hookSpeedInputField.text = data.hookSpeed.ToString("00");
-            pullingSpeedInputField.text = data.pullingSpeed.ToString("00");
-            maxLengthInputField.text = data.maxLength.ToString("00");
-            wallBreakForceInputField.text = data.wallBreakForce.ToString("00");
-            enemyMaxSpeedInputField.text = data.enemyMaxSpeed.ToString("00");
-            enemyMinSpeedInputField.text = data.enemyMinSpeed.ToString("00");
-            speedMultiplierInputField.text = data.speedMultiplier.ToString("00");
-            healthMultiplierInputField.text = data.healthMultiplier.ToString("00");
-            powerMultiplierInputField.text = data.powerMultiplier.ToString("00");
-            speedDownByGroundInputField.text = data.speedDownByGround.ToString("00");
-            speedDownByTimeInputField.text = data.speedDownByTime.ToString("00");
-            healthDownByTimeInputField.text = data.healthDownByTime.ToString("00");
-            empowerMultiplierInputField.text = data.empowerMultiplier.ToString("00");
-            defensePowerInputField.text = data.defensePower.ToString("00");
+            hookSpeedInputField.text = data.hookSpeed.ToString("F3");
+            pullingSpeedInputField.text = data.pullingSpeed.ToString("F3");
+            maxLengthInputField.text = data.maxLength.ToString("F3");
+            wallBreakForceInputField.text = data.wallBreakForce.ToString("F3");
+            enemyMaxSpeedInputField.text = data.enemyMaxSpeed.ToString("F3");
+            enemyMinSpeedInputField.text = data.enemyMinSpeed.ToString("F3");
+            speedMultiplierInputField.text = data.speedMultiplier.ToString("F3");
+            healthMultiplierInputField.text = data.healthMultiplier.ToString("F3");
+            powerMultiplierInputField.text = data.powerMultiplier.ToString("F3");
+            speedDownByGroundInputField.text = data.speedDownByGround.ToString("F3");
+            speedDownByTimeInputField.text = data.speedDownByTime.ToString("F3");
+            healthDownByTimeInputField.text = data.healthDownByTime.ToString("F3");
+            empowerMultiplierInputField.text = data.empowerMultiplier.ToString("F3");
+            defensePowerInputField.text = data.defensePower.ToString("F3");
         }
 
         public void SaveData(GameData data)
@@ -100,8 +100,9 @@ namespace ui
         public void StartEdit()
         {
             gameObject.SetActive(true);
-            // _tempGameData = _gameData.Clone();
-            // LoadData(_tempGameData);
+            DataPersistenceManager.Instance.LoadGame();
+            _tempGameData = _gameData.Clone();
+            LoadData(_tempGameData);
         }
 
         public void Confirm()

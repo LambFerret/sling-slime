@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -14,10 +15,17 @@ namespace sling
         private Camera _cam;
         private Vector3 offset;
 
+        private GameObject _title;
+
         private void Awake()
         {
             _cam = Camera.main;
             rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
+            _title = GameObject.Find("Title");
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -44,6 +52,7 @@ namespace sling
 
         private void OnMouseDown()
         {
+            _title.transform.DOMoveY(10f, 1f).SetEase(Ease.OutBounce).OnComplete(() => { _title.SetActive(false); });
             _isDragging = true;
             offset = transform.position -
                      _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));

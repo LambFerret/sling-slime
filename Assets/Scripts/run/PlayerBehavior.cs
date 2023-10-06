@@ -64,7 +64,7 @@ namespace run
                 case Slime.SlimeType.Wind:
                     speedDownByTime *= slime.MultiplyByType();
                     break;
-                case Slime.SlimeType.Water:
+                case Slime.SlimeType.Fire:
                     empowerMultiplier *= slime.MultiplyByType();
                     break;
                 case Slime.SlimeType.Lightening:

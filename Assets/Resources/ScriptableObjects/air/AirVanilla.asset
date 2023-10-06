@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AirVanilla
   m_EditorClassIdentifier: 
   scoreType: 0
-  scoreName: AirVanilla
-  value: 5
-  sizeValue: 10
-  forceAmount: {x: 1, y: 0}
+  scoreName: Butterfly
+  scoreValue: 5
+  sizeValue: 1
+  forceAmount: {x: 5, y: 2}

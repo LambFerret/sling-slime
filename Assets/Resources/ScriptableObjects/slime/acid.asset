@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59bf8a69c01f433d8c82c5ec4de7029e, type: 3}
+  m_Name: acid
+  m_EditorClassIdentifier: 
+  ID: 53b978e2-2057-40a3-a5ca-1e81aa6501a7
+  slimeName: acid
+  slimeType: 1
+  power: 3
+  speed: 130
+  health: 15
+  sprite: {fileID: 0}

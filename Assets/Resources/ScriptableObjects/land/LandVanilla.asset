@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: LandVanilla
   m_EditorClassIdentifier: 
   scoreType: 1
-  scoreName: LandVanilla
-  value: 3
+  scoreName: CitizenA
+  scoreValue: 0
   sizeValue: 5
-  forceAmount: {x: 1, y: 10}
+  forceAmount: {x: 3, y: 10}
