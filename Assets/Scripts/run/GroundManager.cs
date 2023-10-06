@@ -1,14 +1,16 @@
 using System;
 using components;
 using core;
+using persistence;
+using persistence.data;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace run
 {
-    public class GroundManager : MonoBehaviour
+    public class GroundManager : MonoBehaviour, IDataPersistence
     {
-        public float behindOffset;
+        public int behindOffset;
         public ObjectPooler groundPool;
         public ObjectPooler landObstaclePool;
         public ObjectPooler airObstaclePool;
@@ -29,9 +31,24 @@ namespace run
 
         [Header("Event")] public GameEvent onProgressDistanceUpdated;
 
-
         private float _groundSpeed;
         private int _groundLastIndex;
+
+        public void LoadData(GameData data)
+        {
+            behindOffset = data.behindOffset;
+            distanceFromStart = data.distanceFromStart;
+            distanceMultiplier = data.distanceMultiplier;
+            landObstacleMaxCount = data.landObstacleMaxCount;
+            airObstacleMaxCount = data.airObstacleMaxCount;
+            landObstacleMinCount = data.landObstacleMinCount;
+            airObstacleMinCount = data.airObstacleMinCount;
+
+        }
+
+        public void SaveData(GameData data)
+        {
+        }
 
         private void Awake()
         {

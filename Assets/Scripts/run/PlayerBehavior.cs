@@ -1,11 +1,13 @@
 using System;
 using core;
+using persistence;
+using persistence.data;
 using ScriptableObjects;
 using UnityEngine;
 
 namespace run
 {
-    public class PlayerBehavior : MonoBehaviour
+    public class PlayerBehavior : MonoBehaviour, IDataPersistence
     {
         [HideInInspector] public Rigidbody2D rb;
 
@@ -15,17 +17,15 @@ namespace run
 
         [Header("Status Report")]
         // public float jumpForce = 5f;
-        public float speed = 30f;
-        public float health = 100f;
-        public float power = 1f;
+        public float speed;
+        public float health;
+        public float power;
 
-        [Header("Status Multiplier")]
-        public float speedMultiplier = 3F;
+        [Header("Status Multiplier")] public float speedMultiplier = 3F;
         public float healthMultiplier = 4F;
         public float powerMultiplier = 5F;
 
-        [Header("Config")]
-        public float speedDownByGround = 0.1f;
+        [Header("Config")] public float speedDownByGround = 0.1f;
         public float speedDownByTime = 0.1F;
         public float healthDownByTime = 0.1F;
         public float empowerMultiplier = 1F;
@@ -35,9 +35,28 @@ namespace run
         public GameEvent onPlayerSpeedChanged;
         public GameEvent onPlayerHealthChanged;
 
+
+        public void LoadData(GameData data)
+        {
+            speedMultiplier = data.speedMultiplier;
+            healthMultiplier = data.healthMultiplier;
+            powerMultiplier = data.powerMultiplier;
+            speedDownByGround = data.speedDownByGround;
+            speedDownByTime = data.speedDownByTime;
+            healthDownByTime = data.healthDownByTime;
+            empowerMultiplier = data.empowerMultiplier;
+            defensePower = data.defensePower;
+        }
+
+        public void SaveData(GameData data)
+        {
+        }
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+
+            slime = GameDataManager.Instance.selectedSlime;
             CalculateStatus();
 
             switch (slime.slimeType)
@@ -79,12 +98,14 @@ namespace run
                 // end stage+
                 speed = 0.0F;
             }
+
             health -= healthDownByTime * Time.deltaTime;
             if (health <= 0.1F)
             {
                 // end stage+
                 health = 0.0F;
             }
+
             onPlayerSpeedChanged.Raise(this, speed);
             onPlayerHealthChanged.Raise(this, health);
         }

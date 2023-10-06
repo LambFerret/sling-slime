@@ -6,10 +6,10 @@ namespace run
 {
     public class HookBehavior : MonoBehaviour
     {
-        private TongueController _tongue;
         public DistanceJoint2D joint;
-
         public GameObject childToKeep;
+
+        private TongueController _tongue;
 
         private void Awake()
         {

@@ -13,6 +13,7 @@ namespace ScriptableObjects
             Lightening
         }
 
+        public string ID = Guid.NewGuid().ToString();
         public SlimeType slimeType;
         public float power;
         public float speed;

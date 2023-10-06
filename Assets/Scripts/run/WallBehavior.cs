@@ -2,21 +2,31 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using core;
+using persistence;
+using persistence.data;
 using UnityEngine;
 
 namespace run
 {
-    public class WallBehavior : MonoBehaviour
+    public class WallBehavior : MonoBehaviour, IDataPersistence
     {
-        public float maxForce = 10f; // The force at which the object will "break" free from the wall.
+        public float maxForce = 10f;
 
         private DistanceJoint2D _joint;
         private Rigidbody2D _rb;
         private LineRenderer _line;
-
         private Transform _player;
 
         public bool isSuccess;
+
+        public void LoadData(GameData data)
+        {
+         maxForce = data.wallBreakForce;
+        }
+
+        public void SaveData(GameData data)
+        {
+        }
 
         private void Start()
         {

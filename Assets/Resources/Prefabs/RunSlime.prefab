@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 5445378360042755015}
   - component: {fileID: 2178115881949272703}
   m_Layer: 8
-  m_Name: Slime
+  m_Name: RunSlime
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

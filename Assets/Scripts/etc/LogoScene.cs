@@ -5,15 +5,19 @@ namespace etc
 {
     public class LogoScene : MonoBehaviour
     {
+
+        public GameObject loadingScreen;
+
         private void Start()
         {
-            GameObject.Find("Loading").SetActive(false);
+            loadingScreen.SetActive(false);
             StartCoroutine(LoadTitleScene());
         }
 
-        private static IEnumerator LoadTitleScene()
+        private IEnumerator LoadTitleScene()
         {
             yield return new WaitForSeconds(1.5F);
+            loadingScreen.SetActive(true);
             LoadingScreen.Instance.LoadScene("TitleScene");
         }
     }

@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using components;
 using item;
+using persistence;
+using persistence.data;
 using UnityEngine;
 
 namespace run
 {
-    public class ItemSpawner : MonoBehaviour
+    public class ItemSpawner : MonoBehaviour, IDataPersistence
     {
         public int spawnChance;
         public List<Item> items;
@@ -14,6 +16,15 @@ namespace run
 
         private float _totalSpawnChance;
         private List<GameObject> _itemPool;
+
+        public void LoadData(GameData data)
+        {
+            spawnChance = data.itemSpawnChance;
+        }
+
+        public void SaveData(GameData data)
+        {
+        }
 
         private void Start()
         {

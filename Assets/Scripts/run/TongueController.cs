@@ -1,10 +1,12 @@
 using System;
+using persistence;
+using persistence.data;
 using ScriptableObjects;
 using UnityEngine;
 
 namespace run
 {
-    public class TongueController : MonoBehaviour
+    public class TongueController : MonoBehaviour, IDataPersistence
     {
         public enum State
         {
@@ -16,22 +18,33 @@ namespace run
             JustConsumed,
         }
 
-        public LineRenderer line;
-        public Transform hook;
-        public float desiredAngle = 45F;
-
+        [HideInInspector] public PlayerBehavior player;
         private DistanceJoint2D _joint;
         private HookBehavior _hookBehavior;
-
-        public float hookSpeed = 10f;
-        public float maxLength;
-        public Transform whatsOnTheHook;
-
-        [HideInInspector] public PlayerBehavior player;
-
         private Vector2 _direction = Vector2.right + Vector2.down;
-        public State currentState;
+
+        public LineRenderer line;
+        public Transform hook;
+
+        public float desiredAngle = 45F;
+        public float hookSpeed = 10f;
         public float pullingSpeed = 30F;
+        public float maxLength;
+
+        public Transform whatsOnTheHook;
+        public State currentState;
+
+
+        public void LoadData(GameData data)
+        {
+            hookSpeed = data.hookSpeed;
+            pullingSpeed = data.pullingSpeed;
+            maxLength = data.maxLength;
+        }
+
+        public void SaveData(GameData data)
+        {
+        }
 
         private void Awake()
         {

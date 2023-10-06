@@ -1,10 +1,8 @@
-using System;
 using System.Collections;
-using Cinemachine;
+using core;
 using UnityEngine;
 using DG.Tweening;
 using etc;
-using UnityEngine.SceneManagement;
 
 namespace sling
 {
@@ -16,7 +14,7 @@ namespace sling
 
         public float elasticity;
 
-        private Slime _slime;
+        private PlayableSlime _playableSlime;
         private bool _isDragging;
         private bool _isLoaded;
         private Camera _cam;
@@ -27,26 +25,26 @@ namespace sling
             rope.enabled = false;
         }
 
-        public void Load(Slime slime)
+        public void Load(PlayableSlime playableSlime)
         {
-            _slime = slime;
-            Transform slimeTransform = slime.transform;
+            _playableSlime = playableSlime;
+            Transform slimeTransform = playableSlime.transform;
             slimeTransform.SetParent(transform);
             slimeTransform.transform.DOMove(transform.position, 1f).OnComplete(Reload);
         }
 
         public void Reload()
         {
-            _slime.transform.position = transform.position;
-            _slime.rb.velocity = Vector2.zero;
+            _playableSlime.transform.position = transform.position;
+            _playableSlime.rb.velocity = Vector2.zero;
             _isLoaded = true;
             rope.enabled = false;
-            _slime.rb.isKinematic = true;
+            _playableSlime.rb.isKinematic = true;
         }
 
         private void Update()
         {
-            if (_slime is null) return;
+            if (_playableSlime is null) return;
 
             if (Input.GetMouseButtonDown(0) && _isLoaded)
             {
@@ -55,7 +53,7 @@ namespace sling
                 {
                     _isDragging = true;
                     rope.enabled = true;
-                    _slime.rb.isKinematic = false;
+                    _playableSlime.rb.isKinematic = false;
                 }
             }
 
@@ -64,13 +62,14 @@ namespace sling
             if (Input.GetMouseButtonUp(0) && _isDragging)
             {
                 _isDragging = false;
-                Vector2 directionToSlinger = (Vector2)transform.position - _slime.rb.position;
+                Vector2 directionToSlinger = (Vector2)transform.position - _playableSlime.rb.position;
 
                 if (directionToSlinger.magnitude > minDistance)
                 {
-                    _slime.rb.AddForce(directionToSlinger * elasticity, ForceMode2D.Impulse);
-                    _slime.transform.DOScale(0.1F, 0.5F);
+                    _playableSlime.rb.AddForce(directionToSlinger * elasticity, ForceMode2D.Impulse);
+                    _playableSlime.transform.DOScale(0.1F, 0.5F);
                     _isLoaded = false;
+                    GameDataManager.Instance.selectedSlime = _playableSlime.slime;
                     StartCoroutine(LoadScene());
                 }
                 else
@@ -84,13 +83,13 @@ namespace sling
             if (_isDragging) DragSlime();
 
             rope.SetPosition(0, transform.position);
-            rope.SetPosition(1, _slime.transform.position);
+            rope.SetPosition(1, _playableSlime.transform.position);
         }
 
 
         private static IEnumerator LoadScene()
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.2f);
             LoadingScreen.Instance.LoadScene("RunScene");
         }
 
@@ -115,7 +114,7 @@ namespace sling
                 direction = direction.normalized * maxDistance;
             }
 
-            _slime.transform.position = transform.position + (Vector3)direction;
+            _playableSlime.transform.position = transform.position + (Vector3)direction;
         }
 
 

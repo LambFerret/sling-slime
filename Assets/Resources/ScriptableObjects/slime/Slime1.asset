@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59bf8a69c01f433d8c82c5ec4de7029e, type: 3}
   m_Name: Slime1
   m_EditorClassIdentifier: 
+  ID: 291c33d5-7e1a-4bae-b5bc-b19f0a2a7065
   slimeType: 0
-  power: 3
-  speed: 3
-  health: 3
+  power: 2
+  speed: 2
+  health: 2
   sprite: {fileID: 0}

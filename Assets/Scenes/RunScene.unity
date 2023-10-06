@@ -493,6 +493,10 @@ PrefabInstance:
       propertyPath: onPlayerSpeedChanged
       value: 
       objectReference: {fileID: 11400000, guid: ad6709724a8ed46b7a172dfa7d693e8b, type: 2}
+    - target: {fileID: 3561312370362716800, guid: eef4297754b004f9697fca2da5272c91, type: 3}
+      propertyPath: onPlayerHealthChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 2e04aeb2d2b87412491f648a7f0026ea, type: 2}
     - target: {fileID: 5315460137663407560, guid: eef4297754b004f9697fca2da5272c91, type: 3}
       propertyPath: desiredAngle
       value: 135
@@ -2150,6 +2154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 997180502}
   - component: {fileID: 997180503}
+  - component: {fileID: 997180504}
   m_Layer: 5
   m_Name: health
   m_TagString: Untagged
@@ -2192,6 +2197,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b860c63da125452fa342bb717fa2f303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &997180504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997180501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e815b81dcf941cb92a3b5d91e2f62c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 2e04aeb2d2b87412491f648a7f0026ea, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 997180503}
+        m_TargetAssemblyTypeName: ui.HealthUI, Assembly-CSharp
+        m_MethodName: UpdateHealth
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1008426995
 GameObject:
   m_ObjectHideFlags: 0

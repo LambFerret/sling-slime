@@ -1,15 +1,18 @@
 using System;
+using ScriptableObjects;
 using UnityEngine;
 
 namespace sling
 {
-    public class Slime : MonoBehaviour
+    public class PlayableSlime : MonoBehaviour
     {
         private bool _isDragging;
         private bool _thisIsLoaded;
         private SlingerBehavior _slinger;
+        public Slime slime;
         public Rigidbody2D rb;
         private Camera _cam;
+        private Vector3 offset;
 
         private void Awake()
         {
@@ -31,23 +34,24 @@ namespace sling
         {
             if (_thisIsLoaded) return;
 
-            if (Input.GetMouseButtonDown(0))
+            if (_isDragging)
             {
-                Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
-                if (Vector2.Distance(mousePos, transform.position) < 1.0f)
-                {
-                    _isDragging = true;
-                }
+                Vector3 newPosition =
+                    _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+                transform.position = newPosition + offset;
             }
-
-            if (Input.GetMouseButtonUp(0)) _isDragging = false;
-            if (_isDragging) DragSlime();
         }
 
-        private void DragSlime()
+        private void OnMouseDown()
         {
-            Vector2 mousePos = _cam.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = mousePos;
+            _isDragging = true;
+            offset = transform.position -
+                     _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+        }
+
+        private void OnMouseUp()
+        {
+            _isDragging = false;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using persistence;
 using UnityEngine;
 
 namespace sling
@@ -8,6 +9,7 @@ namespace sling
 
         private void Start()
         {
+            DataPersistenceManager.Instance.LoadGame();
         }
     }
 }
