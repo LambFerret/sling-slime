@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Linq;
+using core;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -8,32 +9,21 @@ using UnityEngine.UI;
 
 namespace etc
 {
-    public class LoadingScreen : MonoBehaviour
+    public class LoadingScreen : Singleton<LoadingScreen>
     {
         public TextMeshProUGUI progressText;
         private Image _blackScreenImage;
         private GameObject _icon;
-        public static LoadingScreen Instance { get; private set; }
 
-        private void Awake()
+        private void Start()
         {
             _blackScreenImage = transform.Find("BlackScreen").GetComponent<Image>();
             _icon = transform.Find("BlackScreen").Find("Icon").gameObject;
-            if (Instance != null && Instance != this)
-            {
-                Destroy(gameObject);
-            }
-            else
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
         }
 
         public void LoadScene(string sceneName)
         {
             gameObject.SetActive(true);
-            var operation = SceneManager.LoadSceneAsync(sceneName);
             StartCoroutine(LoadSceneAsyncRoutine(sceneName));
         }
 

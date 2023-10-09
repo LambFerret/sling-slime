@@ -52,7 +52,12 @@ namespace sling
 
         private void OnMouseDown()
         {
-            _title.transform.DOMoveY(10f, 1f).SetEase(Ease.OutBounce).OnComplete(() => { _title.SetActive(false); });
+            if (_title is not null)
+            {
+                _title.transform.DOMoveY(10f, 1f).SetEase(Ease.OutBounce)
+                    .OnComplete(() => { _title.SetActive(false); });
+            }
+
             _isDragging = true;
             offset = transform.position -
                      _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));

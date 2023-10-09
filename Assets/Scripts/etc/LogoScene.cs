@@ -10,6 +10,7 @@ namespace etc
 
         private void Start()
         {
+            loadingScreen = GameObject.Find("Loading");
             loadingScreen.SetActive(false);
             StartCoroutine(LoadTitleScene());
         }
