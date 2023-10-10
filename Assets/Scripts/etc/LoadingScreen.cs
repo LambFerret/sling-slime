@@ -24,6 +24,7 @@ namespace etc
         public void LoadScene(string sceneName)
         {
             gameObject.SetActive(true);
+            Time.timeScale = 1f;
             StartCoroutine(LoadSceneAsyncRoutine(sceneName));
         }
 

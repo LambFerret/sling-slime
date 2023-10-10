@@ -18,6 +18,7 @@ namespace run
         [Header("Status Report")]
         // public float jumpForce = 5f;
         public float speed;
+
         public float health;
         public float power;
 
@@ -95,15 +96,19 @@ namespace run
             speed -= speedDownByTime * Time.deltaTime;
             if (speed <= 0.1F)
             {
-                // end stage+
-                speed = 0.0F;
+                GameManager.instance.GameOver();
             }
+
+            // this object scale size is following the health
+            var a = health / 10;
+            transform.localScale = new Vector3(a, a, a);
+            // cine camera follow this object and size
+            GameManager.instance.ChangeZoom(10F + a);
 
             health -= healthDownByTime * Time.deltaTime;
             if (health <= 0.1F)
             {
-                // end stage+
-                health = 0.0F;
+                GameManager.instance.GameOver();
             }
 
             onPlayerSpeedChanged.Raise(this, speed);

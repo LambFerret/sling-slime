@@ -8,7 +8,7 @@ namespace ui
     {
         public void GoMain()
         {
-            LoadingScreen.Instance.LoadScene(0);
+            LoadingScreen.Instance.LoadScene("TitleScene");
         }
 
         private void Update()
@@ -23,7 +23,6 @@ namespace ui
         public void SpeedUp()
         {
             GameManager.instance.ChangePlayerSpeed(30F);
-            GameManager.instance.Jump();
             GameManager.instance.Jump();
             GameManager.instance.Jump();
         }

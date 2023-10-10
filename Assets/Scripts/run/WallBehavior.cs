@@ -58,14 +58,17 @@ namespace run
         {
             if (other.CompareTag("Player"))
             {
-                GameManager.instance.ChangeZoom(30F);
+                // GameManager.instance.ChangeZoom(30F);
                 _player = null;
                 _line.enabled = false;
-                Time.timeScale = 1f;
                 if (!isSuccess)
                 {
-                    // GameOver
-                    Debug.Log("Game Over");
+                    GameManager.instance.GameOver();
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                    GameManager.instance.AddPlayerSpeed(-maxForce);
                 }
             }
         }

@@ -22,7 +22,6 @@ namespace ui
 
         public void UpdateScore(Component sender, object data)
         {
-            Debug.Log("Score update called ");
             if (data is not int i) return;
             SetScore(i);
         }

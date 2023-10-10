@@ -29,22 +29,16 @@ namespace sling
             var slime = GameDataManager.Instance.slimeDictionary[id];
             var slimeObject = Instantiate(slimePrefab, transform);
             slimeObject.GetComponent<PlayableSlime>().slime = slime;
-            Debug.Log(slime.ID);
 
             //change color by type of slime
             var slimeRenderer = slimeObject.GetComponent<SpriteRenderer>();
-            switch (slime.slimeType)
+            slimeRenderer.color = slime.slimeType switch
             {
-                case Slime.SlimeType.Wind:
-                    slimeRenderer.color = Color.blue;
-                    break;
-                case Slime.SlimeType.Fire:
-                    slimeRenderer.color = Color.cyan;
-                    break;
-                case Slime.SlimeType.Lightening:
-                    slimeRenderer.color = Color.yellow;
-                    break;
-            }
+                Slime.SlimeType.Wind => Color.blue,
+                Slime.SlimeType.Fire => Color.cyan,
+                Slime.SlimeType.Lightening => Color.yellow,
+                _ => slimeRenderer.color
+            };
 
             slimeObjects.Add(slimeObject);
         }

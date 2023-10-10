@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using etc;
 using run;
 using ScriptableObjects;
 using UnityEngine;
@@ -17,11 +18,12 @@ namespace core
 
         public float playerSpeed;
 
-        public List<Slime> slimes;
-        public Slime currentSlime;
-
         private float _currentZoom;
         private float _targetZoom;
+
+        private bool _isGameOver;
+
+        private GameObject _gameOverPanel;
 
         private void Awake()
         {
@@ -29,6 +31,9 @@ namespace core
             {
                 instance = this;
             }
+
+            _gameOverPanel = GameObject.Find("GameOver");
+            _gameOverPanel.SetActive(false);
         }
 
         private void Start()
@@ -71,6 +76,14 @@ namespace core
         public void AddPlayerSpeed(float value)
         {
             player.speed += value;
+        }
+
+        public void GameOver()
+        {
+            if (_isGameOver) return;
+            _isGameOver = true;
+            _gameOverPanel.SetActive(true);
+            Time.timeScale = 0F;
         }
     }
 }

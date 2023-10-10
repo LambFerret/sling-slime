@@ -39,9 +39,7 @@ namespace ui
 
         public void LoadData(GameData data)
         {
-            Debug.Log("when did i load this?");
             _gameData = data;
-            Debug.Log(data);
             behindOffsetInputField.text = data.behindOffset.ToString();
             distanceFromStartInputField.text = data.distanceFromStart.ToString();
             distanceMultiplierInputField.text = data.distanceMultiplier.ToString();

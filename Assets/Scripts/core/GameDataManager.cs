@@ -13,7 +13,7 @@ namespace core
         {
             base.Awake();
             slimeDictionary = new Dictionary<string, Slime>();
-            var slimes = Resources.LoadAll<Slime>("ScriptableObjects/slime/");
+            var slimes = Resources.LoadAll<Slime>($"ScriptableObjects/slime/");
             foreach (Slime slime in slimes)
             {
                 slimeDictionary.Add(slime.ID, slime);
