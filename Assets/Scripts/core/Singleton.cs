@@ -10,10 +10,10 @@ namespace core
         {
             get
             {
-                if (_instance == null)
+                if (_instance is null)
                 {
                     _instance = FindObjectOfType<T>();
-                    if (_instance == null)
+                    if (_instance is null)
                     {
                         GameObject singletonObject = new GameObject();
                         _instance = singletonObject.AddComponent<T>();

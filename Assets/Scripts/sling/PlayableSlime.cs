@@ -7,14 +7,14 @@ namespace sling
 {
     public class PlayableSlime : MonoBehaviour
     {
+        public Slime slime;
+        public Rigidbody2D rb;
+
         private bool _isDragging;
         private bool _thisIsLoaded;
         private SlingerBehavior _slinger;
-        public Slime slime;
-        public Rigidbody2D rb;
         private Camera _cam;
-        private Vector3 offset;
-
+        private Vector3 _offset;
         private GameObject _title;
 
         private void Awake()
@@ -46,7 +46,7 @@ namespace sling
             {
                 Vector3 newPosition =
                     _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
-                transform.position = newPosition + offset;
+                transform.position = newPosition + _offset;
             }
         }
 
@@ -59,8 +59,8 @@ namespace sling
             }
 
             _isDragging = true;
-            offset = transform.position -
-                     _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
+            _offset = transform.position -
+                      _cam.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10.0f));
         }
 
         private void OnMouseUp()

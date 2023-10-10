@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using core;
 using persistence.data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace persistence
 {
-    public class DataPersistenceManager : MonoBehaviour
+    public class DataPersistenceManager : Singleton<DataPersistenceManager>
     {
         [SerializeField] private bool initializeDataIfNull;
 
@@ -16,20 +17,10 @@ namespace persistence
         private List<IDataPersistence> _dataPersistenceObjects;
 
         private GameData _gameData;
-        public static DataPersistenceManager Instance { get; private set; }
 
-        private void Awake()
+        protected new void Awake()
         {
-            if (Instance != null)
-            {
-                Debug.Log("Found more than one Data Persistence Manager in the scene. Destroying the newest one.");
-                Destroy(gameObject);
-                return;
-            }
-
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
+            base.Awake();
             _dataHandler = new FileDataHandler(Application.persistentDataPath, fileName, useEncryption);
         }
 

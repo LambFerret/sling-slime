@@ -11,9 +11,9 @@ namespace run
     public class WallBehavior : MonoBehaviour, IDataPersistence
     {
         public float maxForce = 10f;
+        public float powerCorrection = 1f;
 
         private DistanceJoint2D _joint;
-        private Rigidbody2D _rb;
         private LineRenderer _line;
         private Transform _player;
 
@@ -21,7 +21,8 @@ namespace run
 
         public void LoadData(GameData data)
         {
-         maxForce = data.wallBreakForce;
+            maxForce = data.wallBreakForce;
+            powerCorrection = data.powerCorrectionIntoObstacle;
         }
 
         public void SaveData(GameData data)
@@ -30,7 +31,6 @@ namespace run
 
         private void Start()
         {
-            _rb = GetComponent<Rigidbody2D>();
             _joint = GetComponent<DistanceJoint2D>();
             _line = GetComponent<LineRenderer>();
             _joint.enabled = false;
@@ -47,11 +47,12 @@ namespace run
                 Time.timeScale = 0.1f;
                 // scale up camera
                 GameManager.instance.ChangeZoom(10F);
+                var power = _player.GetComponent<PlayerBehavior>().power;
 
-                isSuccess = impactForce > maxForce;
+                // 충돌힘 + 파워 * 파워보정치 > 임계점
+                isSuccess = impactForce + power * powerCorrection > maxForce;
             }
         }
-
 
 
         private void OnTriggerExit2D(Collider2D other)
@@ -79,7 +80,6 @@ namespace run
             // if player null, disable line
             if (_player is null) return;
             _line.SetPosition(1, _player.position);
-
         }
     }
 }

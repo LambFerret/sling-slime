@@ -28,6 +28,7 @@ namespace run
 
         [Header("Config")] public float speedDownByGround = 0.1f;
         public float speedDownByTime = 0.1F;
+        public float speedDownBySize = 0.1F;
         public float healthDownByTime = 0.1F;
         public float empowerMultiplier = 1F;
         public float defensePower = 1F;
@@ -43,6 +44,7 @@ namespace run
             healthMultiplier = data.healthMultiplier;
             powerMultiplier = data.powerMultiplier;
             speedDownByGround = data.speedDownByGround;
+            speedDownBySize = data.speedDownBySize;
             speedDownByTime = data.speedDownByTime;
             healthDownByTime = data.healthDownByTime;
             empowerMultiplier = data.empowerMultiplier;
@@ -93,23 +95,17 @@ namespace run
 
         private void Update()
         {
-            speed -= speedDownByTime * Time.deltaTime;
-            if (speed <= 0.1F)
-            {
-                GameManager.instance.GameOver();
-            }
+            var currentTime = Time.deltaTime;
+            speed -= speedDownByTime * power * currentTime;
+            speed -= speedDownBySize * health * currentTime;
+            health -= healthDownByTime * currentTime;
 
-            // this object scale size is following the health
+            if (speed <= 0.1F) GameManager.instance.GameOver();
+            if (health <= 0.1F) GameManager.instance.GameOver();
+
             var a = health / 10;
             transform.localScale = new Vector3(a, a, a);
-            // cine camera follow this object and size
             GameManager.instance.ChangeZoom(10F + a);
-
-            health -= healthDownByTime * Time.deltaTime;
-            if (health <= 0.1F)
-            {
-                GameManager.instance.GameOver();
-            }
 
             onPlayerSpeedChanged.Raise(this, speed);
             onPlayerHealthChanged.Raise(this, health);

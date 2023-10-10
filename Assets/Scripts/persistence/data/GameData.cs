@@ -48,7 +48,9 @@ namespace persistence.data
         public float speedMultiplier;
         public float healthMultiplier;
         public float powerMultiplier;
+        public float powerCorrectionIntoObstacle;
         public float speedDownByGround;
+        public float speedDownBySize;
         public float speedDownByTime;
         public float healthDownByTime;
         public float empowerMultiplier;
@@ -84,11 +86,11 @@ namespace persistence.data
             healthMultiplier = 3F;
             powerMultiplier = 3F;
             speedDownByGround = 0.1F;
+            speedDownBySize = 0.1F;
             speedDownByTime = 0.1F;
             healthDownByTime = 0.1F;
             empowerMultiplier = 1F;
             defensePower = 1F;
-            Debug.Log("NEW GAME");
         }
 
         public GameData Clone()

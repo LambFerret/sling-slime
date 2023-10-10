@@ -11,14 +11,14 @@ namespace item
         public override void Use()
         {
             base.Use();
-            GameManager.instance.AddPlayerSpeed(boostPower);
+            GameManager.instance.MultiplyPlayerSpeed(boostPower);
             StartCoroutine(Boost());
         }
 
         private IEnumerator Boost()
         {
             yield return new WaitForSeconds(duration);
-            GameManager.instance.AddPlayerSpeed(-boostPower);
+            GameManager.instance.MultiplyPlayerSpeed(2-boostPower);
         }
     }
 }

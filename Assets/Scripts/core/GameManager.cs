@@ -39,7 +39,6 @@ namespace core
         private void Start()
         {
             playerSpeed = player.speed;
-
             _currentZoom = _targetZoom = virtualCamera.m_Lens.OrthographicSize;
         }
 
@@ -76,6 +75,11 @@ namespace core
         public void AddPlayerSpeed(float value)
         {
             player.speed += value;
+        }
+
+        public void MultiplyPlayerSpeed(float value)
+        {
+            player.speed *= value;
         }
 
         public void GameOver()

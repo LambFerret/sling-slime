@@ -37,7 +37,6 @@ namespace ui
 
             if (_isNowUsing)
             {
-                Debug.Log(_duration + " / " + _item.duration);
                 _duration -= Time.deltaTime;
                 _icon.fillAmount = _duration / _item.duration;
                 if (_duration <= 0)
