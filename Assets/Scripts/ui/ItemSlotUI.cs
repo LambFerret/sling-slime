@@ -48,6 +48,9 @@ namespace ui
 
         private void ClearItem()
         {
+            _item.OnEnd();
+            _isNowUsing = false;
+            _item.gameObject.SetActive(false);
             _item = null;
             _icon.sprite = null;
             _icon.enabled = false;
@@ -58,7 +61,8 @@ namespace ui
         public void UseItem()
         {
             if (_item is null) return;
-            _item.Use();
+            if (_isNowUsing) return;
+            _item.OnUse();
             _duration = _item.duration;
             _isNowUsing = true;
         }

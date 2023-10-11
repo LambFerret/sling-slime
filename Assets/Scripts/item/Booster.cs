@@ -8,17 +8,23 @@ namespace item
     {
         public float boostPower;
 
-        public override void Use()
+        public override void OnUse()
         {
-            base.Use();
-            GameManager.instance.MultiplyPlayerSpeed(boostPower);
-            StartCoroutine(Boost());
+            GameManager.instance.AddPlayerSpeed(boostPower);
+            // y axis of player rb is fixed to that height
+            GameManager.instance.player.rb.constraints |= RigidbodyConstraints2D.FreezePositionY;
         }
 
-        private IEnumerator Boost()
+        public override void OnGet()
         {
-            yield return new WaitForSeconds(duration);
-            GameManager.instance.MultiplyPlayerSpeed(2-boostPower);
+            //
+        }
+
+        public override void OnEnd()
+        {
+            Debug.Log("duration over ");
+            GameManager.instance.player.rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+            GameManager.instance.AddPlayerSpeed(-boostPower);
         }
     }
 }

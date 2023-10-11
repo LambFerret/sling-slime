@@ -77,11 +77,6 @@ namespace core
             player.speed += value;
         }
 
-        public void MultiplyPlayerSpeed(float value)
-        {
-            player.speed *= value;
-        }
-
         public void GameOver()
         {
             if (_isGameOver) return;

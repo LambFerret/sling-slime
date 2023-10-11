@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace item
 {
-    public class Item : MonoBehaviour
+    public abstract class Item : MonoBehaviour
     {
         public string itemName;
         public string itemDescription;
@@ -21,17 +21,17 @@ namespace item
             _onItemGet = Resources.Load<GameEvent>("ScriptableObjects/event/GetItem");
         }
 
-        public virtual void Use()
-        {
-            // impl
-        }
+        public abstract void OnGet();
+
+        public abstract void OnUse();
+
+        public abstract void OnEnd();
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.GetComponent<PlayerBehavior>() == null) return;
-            Debug.Log("trigger entered");
             _onItemGet.Raise(this, this);
-            gameObject.SetActive(false);
+            // gameObject.SetActive(false);
         }
     }
 }

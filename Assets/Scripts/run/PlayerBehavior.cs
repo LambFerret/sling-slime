@@ -96,12 +96,9 @@ namespace run
         private void Update()
         {
             var currentTime = Time.deltaTime;
-            speed -= speedDownByTime * power * currentTime;
-            speed -= speedDownBySize * health * currentTime;
-            health -= healthDownByTime * currentTime;
-
-            if (speed <= 0.1F) GameManager.instance.GameOver();
-            if (health <= 0.1F) GameManager.instance.GameOver();
+            AddSpeed(-speedDownByTime * power * currentTime);
+            AddSpeed(-speedDownBySize * health * currentTime);
+            AddHealth(-healthDownByTime * currentTime);
 
             var a = health / 10;
             transform.localScale = new Vector3(a, a, a);
@@ -109,6 +106,26 @@ namespace run
 
             onPlayerSpeedChanged.Raise(this, speed);
             onPlayerHealthChanged.Raise(this, health);
+        }
+
+        private void AddSpeed(float value)
+        {
+            speed += value;
+            if (speed <= 0.1F)
+            {
+                speed = 0;
+                GameManager.instance.GameOver();
+            }
+        }
+
+        private void AddHealth(float value)
+        {
+            health += value;
+            if (health <= 0.1F)
+            {
+                health = 0;
+                GameManager.instance.GameOver();
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D other)
